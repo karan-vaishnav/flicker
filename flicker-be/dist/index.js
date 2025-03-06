@@ -34,22 +34,66 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const ws_1 = __importStar(require("ws"));
+const unique_names_generator_1 = require("unique-names-generator");
 const wss = new ws_1.WebSocketServer({ port: 8080 });
-const clients = [];
+const users = [];
+const natureNouns = [
+    "River",
+    "Mountain",
+    "Comet",
+    "Galaxy",
+    "Horizon",
+    "Echo",
+    "Blaze",
+    "Storm",
+    "Aurora",
+    "Ember",
+    "Shadow",
+    "Breeze",
+    "Vortex",
+    "Drift",
+    "Canyon",
+    "Tundra",
+    "Nebula",
+    "Cosmos",
+    "Zephyr",
+    "Mist",
+];
+function generateUsername() {
+    return (0, unique_names_generator_1.uniqueNamesGenerator)({
+        dictionaries: [unique_names_generator_1.adjectives, natureNouns],
+        separator: "",
+        length: 2,
+        style: "capital",
+    });
+}
+function generateUniqueUsername() {
+    let username = generateUsername();
+    while (users.some((user) => user.username === username)) {
+        username = generateUsername();
+    }
+    return username;
+}
 wss.on("connection", function connection(ws) {
-    clients.push(ws);
+    const username = generateUniqueUsername();
+    const user = { ws, username };
+    users.push(user);
     ws.on("error", console.error);
     ws.on("message", function message(data) {
-        clients.forEach((client) => {
-            if (client !== ws && client.readyState === ws_1.default.OPEN) {
-                client.send(`User: ${data}`);
-            }
-        });
+        const sender = users.find((user) => user.ws === ws);
+        if (sender) {
+            const senderUsername = sender.username;
+            users.forEach((user) => {
+                if (user.ws !== ws && user.ws.readyState === ws_1.default.OPEN) {
+                    user.ws.send(`${senderUsername}: ${data}`);
+                }
+            });
+        }
     });
     ws.on("close", () => {
-        const index = clients.indexOf(ws);
+        const index = users.findIndex((user) => user.ws === ws);
         if (index > -1) {
-            clients.slice(index, 1);
+            users.splice(index, 1);
         }
     });
     ws.send("Welcome to the Chat!");
