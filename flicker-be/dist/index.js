@@ -37,6 +37,7 @@ const ws_1 = __importStar(require("ws"));
 const unique_names_generator_1 = require("unique-names-generator");
 const wss = new ws_1.WebSocketServer({ port: 8080 });
 const users = [];
+const messages = [];
 const natureNouns = [
     "River",
     "Mountain",
@@ -76,24 +77,36 @@ function generateUniqueUsername() {
 }
 wss.on("connection", function connection(ws) {
     const username = generateUniqueUsername();
-    const user = { ws, username };
+    const user = { ws, username, lastActive: Date.now() };
     users.push(user);
     ws.on("error", console.error);
     ws.on("message", function message(data) {
         const sender = users.find((user) => user.ws === ws);
         if (sender) {
             const senderUsername = sender.username;
+            const parsedData = JSON.parse(data.toString());
+            const timestamp = Date.now();
             const messageObject = {
                 username: senderUsername,
-                text: data.toString(),
-                timestamp: new Date().toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                }),
+                text: parsedData.text,
+                timestamp: timestamp,
+                type: parsedData.type || "message",
             };
+            messages.push(messageObject);
+            if (messageObject.type === "whisper") {
+                setTimeout(() => {
+                    const index = messages.findIndex((msg) => msg.username === messageObject.username &&
+                        msg.text === messageObject.text &&
+                        msg.timestamp === messageObject.timestamp);
+                    if (index > -1) {
+                        messages.splice(index, 1);
+                    }
+                }, 20000);
+            }
             users.forEach((user) => {
                 if (user.ws !== ws && user.ws.readyState === ws_1.default.OPEN) {
-                    user.ws.send(JSON.stringify(messageObject));
+                    const filteredMessages = messages.filter((msg) => msg.type !== "whisper" || Date.now() - msg.timestamp < 20000);
+                    user.ws.send(JSON.stringify(filteredMessages));
                 }
             });
         }
@@ -104,5 +117,18 @@ wss.on("connection", function connection(ws) {
             users.splice(index, 1);
         }
     });
-    ws.send("Welcome to the Chat!");
+    ws.send(JSON.stringify(messages));
 });
+setInterval(() => {
+    let i = users.length - 1;
+    while (i >= 0) {
+        if (users[i]) {
+            const now = Date.now();
+            if (now - users[i].lastActive > 300000) {
+                users[i].ws.close();
+                users.splice(i, 1);
+            }
+        }
+        i--;
+    }
+}, 60000);
