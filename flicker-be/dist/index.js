@@ -83,9 +83,17 @@ wss.on("connection", function connection(ws) {
         const sender = users.find((user) => user.ws === ws);
         if (sender) {
             const senderUsername = sender.username;
+            const messageObject = {
+                username: senderUsername,
+                text: data.toString(),
+                timestamp: new Date().toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                }),
+            };
             users.forEach((user) => {
                 if (user.ws !== ws && user.ws.readyState === ws_1.default.OPEN) {
-                    user.ws.send(`${senderUsername}: ${data}`);
+                    user.ws.send(JSON.stringify(messageObject));
                 }
             });
         }
