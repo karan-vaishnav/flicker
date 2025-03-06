@@ -101,10 +101,18 @@ wss.on("connection", function connection(ws) {
                     if (index > -1) {
                         messages.splice(index, 1);
                     }
+                    // Broadcast updated messages
+                    users.forEach((user) => {
+                        if (user.ws.readyState === ws_1.default.OPEN) {
+                            const filteredMessages = messages.filter((msg) => msg.type !== "whisper" || Date.now() - msg.timestamp < 20000);
+                            user.ws.send(JSON.stringify(filteredMessages));
+                        }
+                    });
                 }, 20000);
             }
+            // Send updated messages
             users.forEach((user) => {
-                if (user.ws !== ws && user.ws.readyState === ws_1.default.OPEN) {
+                if (user.ws.readyState === ws_1.default.OPEN) {
                     const filteredMessages = messages.filter((msg) => msg.type !== "whisper" || Date.now() - msg.timestamp < 20000);
                     user.ws.send(JSON.stringify(filteredMessages));
                 }
@@ -112,23 +120,7 @@ wss.on("connection", function connection(ws) {
         }
     });
     ws.on("close", () => {
-        const index = users.findIndex((user) => user.ws === ws);
-        if (index > -1) {
-            users.splice(index, 1);
-        }
+        users.splice(users.findIndex((user) => user.ws === ws), 1);
     });
     ws.send(JSON.stringify(messages));
 });
-setInterval(() => {
-    let i = users.length - 1;
-    while (i >= 0) {
-        if (users[i]) {
-            const now = Date.now();
-            if (now - users[i].lastActive > 300000) {
-                users[i].ws.close();
-                users.splice(i, 1);
-            }
-        }
-        i--;
-    }
-}, 60000);
