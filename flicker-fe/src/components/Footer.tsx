@@ -4,7 +4,12 @@ export function Footer() {
       <h1 className="font-title">Flicker</h1>
       <p>Developed by Karan 🖤</p>
       <div className="flex gap-4">
-        <div className="cursor-pointer rounded-4xl p-2 hover:bg-gray-200">
+        <a
+          href="https://github.com/your-github-username"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cursor-pointer rounded-4xl p-2 hover:bg-gray-200"
+        >
           <svg
             width="24px"
             height="24px"
@@ -29,8 +34,14 @@ export function Footer() {
               stroke-linejoin="round"
             ></path>
           </svg>
-        </div>
-        <div className="cursor-pointer rounded-4xl p-2 hover:bg-gray-200">
+        </a>
+
+        <a
+          href="https://twitter.com/your-twitter-username"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cursor-pointer rounded-4xl p-2 hover:bg-gray-200"
+        >
           <svg
             width="24px"
             height="24px"
@@ -52,7 +63,7 @@ export function Footer() {
               stroke-linecap="round"
             ></path>
           </svg>
-        </div>
+        </a>
       </div>
     </div>
   );

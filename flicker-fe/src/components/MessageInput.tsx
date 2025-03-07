@@ -19,19 +19,21 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
 
   return (
     <div className="flex items-center p-3 bg-white shadow rounded-lg gap-4 font-text">
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        className="flex-grow border p-2 pl-4 pr-4 rounded-3xl"
-        placeholder="Type your message..."
-      />
-      <button
-        onClick={handleSendMessage}
-        className="bg-blue-500 text-white p-2 rounded-lg cursor-pointer"
-      >
-        Send
-      </button>
+      <div className="w-full flex border pl-4 pr-4 rounded-3xl">
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className="flex-grow p-2 w-full outline-none"
+          placeholder="Type your message..."
+        />
+        <button
+          onClick={handleSendMessage}
+          className="bg-blue-500 text-white p-2 rounded-lg cursor-pointer"
+        >
+          send
+        </button>
+      </div>
 
       <form className="flex flex-col space-x-4 antialiased items-center">
         <label

@@ -6,6 +6,7 @@ import type { Message } from "../types/message.d.ts";
 import { HeaderComponent } from "./HeaderComponent.tsx";
 import { Footer } from "./Footer.tsx";
 
+
 const ChatRoom: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [ws, setWs] = useState<WebSocket | null>(null);
