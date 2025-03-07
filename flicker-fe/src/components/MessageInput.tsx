@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
-// Define the correct props type
 interface MessageInputProps {
   onSendMessage: (text: string, type: "message" | "whisper") => void;
 }
@@ -31,14 +31,18 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
       >
         Send
       </button>
-      <button
+
+      <motion.button
         onClick={() => setIsWhisper(!isWhisper)}
-        className={`p-2 rounded-lg transition-colors ${
+        className={`p-2 rounded-full transition-colors duration-200 ease-in-out ${
           isWhisper ? "bg-red-500 text-white" : "bg-gray-300 text-black"
         }`}
+        animate={{ scale: isWhisper ? 1.1 : 1 }}
+        whileHover={{ scale: 1.2 }}
+        whileTap={{ scale: 0.9 }}
       >
-        Whisper
-      </button>
+        {isWhisper ? "Whisper On" : "Whisper Off"}
+      </motion.button>
     </div>
   );
 };

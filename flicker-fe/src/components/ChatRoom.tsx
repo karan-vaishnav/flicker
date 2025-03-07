@@ -1,9 +1,9 @@
-// src/components/ChatRoom.tsx
 import React, { useState, useEffect, useRef } from "react";
 import MessageComponent from "./Message.tsx";
 import MessageInput from "./MessageInput.tsx";
 import { createWebSocket } from "../services/websocketService.ts";
 import type { Message } from "../types/message.d.ts";
+import { HeaderComponent } from "./HeaderComponent.tsx";
 
 const ChatRoom: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -37,14 +37,19 @@ const ChatRoom: React.FC = () => {
   };
 
   return (
-    <div className="p-4 h-screen flex flex-col">
-      <div className="flex-grow overflow-y-auto">
-        {messages.map((message, index) => (
-          <MessageComponent key={index} message={message} />
-        ))}
-        <div ref={chatBottomRef} />
+    <div>
+      <div>
+        <HeaderComponent />
       </div>
-      <MessageInput onSendMessage={handleSendMessage} />
+      <div className="p-4 h-screen flex flex-col">
+        <div className="flex-grow overflow-y-auto">
+          {messages.map((message, index) => (
+            <MessageComponent key={index} message={message} />
+          ))}
+          <div ref={chatBottomRef} />
+        </div>
+        <MessageInput onSendMessage={handleSendMessage} />
+      </div>
     </div>
   );
 };

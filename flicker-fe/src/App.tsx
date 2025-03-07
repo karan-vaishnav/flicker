@@ -1,5 +1,3 @@
-
-// import React from "react";
 import ChatRoom from "./components/ChatRoom.tsx";
 
 function App() {
