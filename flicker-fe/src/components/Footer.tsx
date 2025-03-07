@@ -1,10 +1,10 @@
 export function Footer() {
   return (
     <div className="flex justify-between text-black p-2 w-full font-text text-2xl items-center">
-      <h1>Flicker</h1>
+      <h1 className="font-title">Flicker</h1>
       <p>Developed by Karan 🖤</p>
       <div className="flex gap-4">
-        <div className="cursor-pointer">
+        <div className="cursor-pointer rounded-4xl p-2 hover:bg-gray-200">
           <svg
             width="24px"
             height="24px"
@@ -30,7 +30,7 @@ export function Footer() {
             ></path>
           </svg>
         </div>
-        <div className="cursor-pointer">
+        <div className="cursor-pointer rounded-4xl p-2 hover:bg-gray-200">
           <svg
             width="24px"
             height="24px"

@@ -23,7 +23,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="flex-grow border p-2 pl-4 rounded-3xl"
+        className="flex-grow border p-2 pl-4 pr-4 rounded-3xl"
         placeholder="Type your message..."
       />
       <button
