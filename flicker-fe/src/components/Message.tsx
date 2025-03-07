@@ -13,7 +13,7 @@ const MessageComponent: React.FC<MessageProps> = ({ message }) => {
 
   return (
     <div
-      className={`p-3 rounded-lg mb-2 ${
+      className={`p-3 font-text rounded-lg mb-2 ${
         message.type === "whisper" ? "bg-red-100 text-red-600" : "bg-gray-100"
       }`}
     >
