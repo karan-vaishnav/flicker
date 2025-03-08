@@ -14,7 +14,9 @@ interface Message {
   type: "message" | "whisper";
 }
 
-const wss = new WebSocketServer({ port: 8080 });
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
+
+const wss = new WebSocketServer({ port: PORT });
 const users: User[] = [];
 const messages: Message[] = [];
 
@@ -104,7 +106,6 @@ wss.on("connection", function connection(ws) {
         }, 20000);
       }
 
-      // Send updated messages
       users.forEach((user) => {
         if (user.ws.readyState === WebSocket.OPEN) {
           const filteredMessages = messages.filter(
