@@ -20,12 +20,12 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
 
   return (
     <div className="flex items-center p-3 gap-2 font-text">
-      <div className="w-full flex border-[1px] border-[var(--color-green)] pl-4 pr-4 rounded-3xl">
+      <div className="w-full flex border-[1px] border-[var(--color-green)] pl-4 pr-4 rounded-3xl dark:text-white">
         <input
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="flex-grow p-2 w-full outline-none"
+          className="flex-grow p-2 w-full outline-none dark:text-white"
           placeholder="Type your message..."
         />
         <button

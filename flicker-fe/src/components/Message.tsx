@@ -23,11 +23,11 @@ const MessageComponent: React.FC<MessageProps> = ({ message }) => {
           : "border-[2px] border-[var(--color-purple)]"
       }`}
     >
-      <div>
+      <div className="flex gap-2">
         <span className="font-semibold text-[var(--color-darkpurple)]">
-          {message.username}
+          {message.username}:
         </span>{" "}
-        : {message.text}
+         <div className="dark:text-white">{message.text}</div>
       </div>
       <div className="text-gray-400 text-sm">{formattedTime}</div>
     </div>
