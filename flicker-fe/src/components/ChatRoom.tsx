@@ -42,7 +42,7 @@ const ChatRoom: React.FC = () => {
       <div>
         <HeaderComponent />
       </div>
-      <div className="p-4 h-[85vh] flex flex-col">
+      <div className="p-4 h-[80vh] flex flex-col">
         <div className="flex-grow overflow-y-auto">
           {messages.map((message, index) => (
             <MessageComponent key={index} message={message} />

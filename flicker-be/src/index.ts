@@ -103,7 +103,7 @@ wss.on("connection", function connection(ws) {
               user.ws.send(JSON.stringify(filteredMessages));
             }
           });
-        }, 20000);
+        }, 10000);
       }
 
       users.forEach((user) => {
@@ -125,5 +125,5 @@ wss.on("connection", function connection(ws) {
     );
   });
 
-  ws.send(JSON.stringify(messages));
+  ws.send(JSON.stringify([]));
 });

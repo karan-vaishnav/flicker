@@ -35,7 +35,8 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const ws_1 = __importStar(require("ws"));
 const unique_names_generator_1 = require("unique-names-generator");
-const wss = new ws_1.WebSocketServer({ port: 8080 });
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
+const wss = new ws_1.WebSocketServer({ port: PORT });
 const users = [];
 const messages = [];
 const natureNouns = [
@@ -101,16 +102,14 @@ wss.on("connection", function connection(ws) {
                     if (index > -1) {
                         messages.splice(index, 1);
                     }
-                    // Broadcast updated messages
                     users.forEach((user) => {
                         if (user.ws.readyState === ws_1.default.OPEN) {
                             const filteredMessages = messages.filter((msg) => msg.type !== "whisper" || Date.now() - msg.timestamp < 20000);
                             user.ws.send(JSON.stringify(filteredMessages));
                         }
                     });
-                }, 20000);
+                }, 10000);
             }
-            // Send updated messages
             users.forEach((user) => {
                 if (user.ws.readyState === ws_1.default.OPEN) {
                     const filteredMessages = messages.filter((msg) => msg.type !== "whisper" || Date.now() - msg.timestamp < 20000);
@@ -122,5 +121,5 @@ wss.on("connection", function connection(ws) {
     ws.on("close", () => {
         users.splice(users.findIndex((user) => user.ws === ws), 1);
     });
-    ws.send(JSON.stringify(messages));
+    ws.send(JSON.stringify([]));
 });

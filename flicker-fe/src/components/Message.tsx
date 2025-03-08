@@ -29,7 +29,9 @@ const MessageComponent: React.FC<MessageProps> = ({ message }) => {
         </span>{" "}
         <div className="dark:text-white">{message.text}</div>
       </div>
-      <div className="text-gray-400 text-sm">{formattedTime}</div>
+      <div className="text-[var(--color-gray-500)] text-sm">
+        {formattedTime}
+      </div>
     </div>
   );
 };

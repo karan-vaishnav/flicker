@@ -8,6 +8,10 @@
   --color-purple: #cb6ce6;
   --color-darkpurple: #760097;
   --color-green: #0097b2;
+  --color-gray: #f2f2f2;
+  --color-black-900: #181817;
+  --color-black-800: #080808;
+  --color-gray-500: #676767;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
