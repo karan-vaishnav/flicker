@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
+import send from "../assets/sendIcon.svg";
 
 interface MessageInputProps {
   onSendMessage: (text: string, type: "message" | "whisper") => void;
@@ -18,8 +19,8 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
   };
 
   return (
-    <div className="flex items-center p-3 bg-white shadow rounded-lg gap-4 font-text">
-      <div className="w-full flex border pl-4 pr-4 rounded-3xl">
+    <div className="flex items-center p-3 gap-2 font-text">
+      <div className="w-full flex border-[1px] border-[var(--color-green)] pl-4 pr-4 rounded-3xl">
         <input
           type="text"
           value={text}
@@ -29,18 +30,18 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
         />
         <button
           onClick={handleSendMessage}
-          className="bg-blue-500 text-white p-2 rounded-lg cursor-pointer"
+          className=" text-white p-2 rounded-lg cursor-pointer"
         >
-          send
+          <img src={send} alt="sendIcon" className="w-[25px]" />
         </button>
       </div>
 
-      <form className="flex flex-col space-x-4 antialiased items-center">
+      <form className="flex flex-col space-x-4 antialiased items-center rotate-270">
         <label
           htmlFor="whisper-toggle"
           className={twMerge(
-            "h-7 px-1 flex items-center border border-transparent shadow-[inset_0px_0px_12px_rgba(0,0,0,0.25)] rounded-full w-[60px] relative cursor-pointer transition duration-200",
-            isWhisper ? "bg-red-500" : "bg-gray-300"
+            "h-6 px-1 flex items-center border border-transparent shadow-[inset_0px_0px_12px_rgba(0,0,0,0.25)] rounded-full w-[50px] relative cursor-pointer transition duration-200",
+            isWhisper ? "bg-[var(--color-purple)]" : "bg-gray-300"
           )}
         >
           <motion.div

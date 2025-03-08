@@ -92,7 +92,6 @@ wss.on("connection", function connection(ws) {
             messages.splice(index, 1);
           }
 
-          // Broadcast updated messages
           users.forEach((user) => {
             if (user.ws.readyState === WebSocket.OPEN) {
               const filteredMessages = messages.filter(

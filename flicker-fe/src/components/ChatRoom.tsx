@@ -39,7 +39,7 @@ const ChatRoom: React.FC = () => {
   };
 
   return (
-    <div className="p-2 h-screen w-[1200px]">
+    <div className="p-2 h-screen w-[1200px] flex flex-col gap-5">
       <div>
         <HeaderComponent />
       </div>

@@ -1,8 +1,9 @@
+import logo from "../assets/flicker-logo.svg"
 export function Footer() {
   return (
     <div className="flex justify-between text-black p-2 w-full font-text text-2xl items-center">
-      <h1 className="font-title">Flicker</h1>
-      <p>Developed by Karan 🖤</p>
+      <img src={logo} alt="logo" className="h-[30px]"/>
+      <p>Developed by Karan</p>
       <div className="flex gap-4">
         <a
           href="https://github.com/your-github-username"

@@ -5,5 +5,9 @@
   --font-title: "Sigmar", sans-serif;
   --font-subtitle: "Bebas Neue", sans-serif;
   --font-text: "Roboto Condensed", sans-serif;
-
+  --color-purple: #cb6ce6;
+  --color-darkpurple: #760097;
+  --color-green: #0097b2;
 }
+
+@custom-variant dark (&:where(.dark, .dark *));

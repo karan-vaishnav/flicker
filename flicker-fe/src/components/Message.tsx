@@ -18,12 +18,16 @@ const MessageComponent: React.FC<MessageProps> = ({ message }) => {
   return (
     <div
       className={`p-3 font-text flex items-center justify-between rounded-lg mb-2 ${
-        message.type === "whisper" ? "bg-red-100 text-red-600" : "bg-gray-100"
+        message.type === "whisper"
+          ? "bg-[var(--color-purple)] border-[2px] border-[var(--color-darkpurple)] text-white"
+          : "border-[2px] border-[var(--color-purple)]"
       }`}
     >
       <div>
-        <span className="font-semibold">{message.username}</span> :{" "}
-        {message.text}
+        <span className="font-semibold text-[var(--color-darkpurple)]">
+          {message.username}
+        </span>{" "}
+        : {message.text}
       </div>
       <div className="text-gray-400 text-sm">{formattedTime}</div>
     </div>
