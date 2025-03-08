@@ -13,7 +13,7 @@ const ChatRoom: React.FC = () => {
 
   useEffect(() => {
     const newWs = createWebSocket(
-      "wss://flicker-be.vercel.app/",
+      "wss://flicker-production-8158.up.railway.app/",
       (event) => {
         const receivedMessages: Message[] = JSON.parse(event.data);
         setMessages(receivedMessages);
