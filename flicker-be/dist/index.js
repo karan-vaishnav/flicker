@@ -38,7 +38,7 @@ const unique_names_generator_1 = require("unique-names-generator");
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 const wss = new ws_1.WebSocketServer({ port: PORT });
 const users = [];
-const messages = [];
+let messages = [];
 const natureNouns = [
     "River",
     "Mountain",
@@ -121,5 +121,7 @@ wss.on("connection", function connection(ws) {
     ws.on("close", () => {
         users.splice(users.findIndex((user) => user.ws === ws), 1);
     });
-    ws.send(JSON.stringify([]));
+    messages = [];
+    const filteredMessages = messages.filter((msg) => msg.type !== "whisper" || Date.now() - msg.timestamp < 20000);
+    ws.send(JSON.stringify(filteredMessages));
 });
