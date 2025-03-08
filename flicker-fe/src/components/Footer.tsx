@@ -6,7 +6,7 @@ export function Footer() {
       <p className="text-sm sm:text-lg md:text-xl">Developed by Karan</p>
       <div className="flex">
         <a
-          href="https://github.com/your-github-username"
+          href="https://github.com/karan-vaishnav"
           target="_blank"
           rel="noopener noreferrer"
           className="cursor-pointer rounded-4xl p-2 hover:bg-gray-200"
@@ -39,7 +39,7 @@ export function Footer() {
         </a>
 
         <a
-          href="https://twitter.com/your-twitter-username"
+          href="https://x.com/krn_vaishnav"
           target="_blank"
           rel="noopener noreferrer"
           className="cursor-pointer rounded-4xl p-2 hover:bg-gray-200"
