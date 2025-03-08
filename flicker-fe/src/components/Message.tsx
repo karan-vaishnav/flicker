@@ -27,7 +27,7 @@ const MessageComponent: React.FC<MessageProps> = ({ message }) => {
         <span className="font-semibold text-[var(--color-darkpurple)]">
           {message.username}:
         </span>{" "}
-         <div className="dark:text-white">{message.text}</div>
+        <div className="dark:text-white">{message.text}</div>
       </div>
       <div className="text-gray-400 text-sm">{formattedTime}</div>
     </div>
