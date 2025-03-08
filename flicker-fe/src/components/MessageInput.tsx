@@ -18,6 +18,13 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
     }
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
   return (
     <div className="flex items-center p-3 gap-2 font-text">
       <div className="w-full flex border-[1px] border-[var(--color-green)] pl-4 pr-4 rounded-3xl dark:text-white">
@@ -27,6 +34,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
           onChange={(e) => setText(e.target.value)}
           className="flex-grow p-2 w-full outline-none dark:text-white"
           placeholder="Type your message..."
+          onKeyDown={handleKeyPress}
         />
         <button
           onClick={handleSendMessage}
