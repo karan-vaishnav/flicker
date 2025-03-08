@@ -18,7 +18,7 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 
 const wss = new WebSocketServer({ port: PORT });
 const users: User[] = [];
-let messages: Message[] = [];
+const messages: Message[] = [];
 
 const natureNouns = [
   "River",
@@ -125,10 +125,5 @@ wss.on("connection", function connection(ws) {
     );
   });
 
-  messages = [];
-
-  const filteredMessages = messages.filter(
-    (msg) => msg.type !== "whisper" || Date.now() - msg.timestamp < 20000
-  );
-  ws.send(JSON.stringify(filteredMessages));
+  ws.send(JSON.stringify(messages));
 });
