@@ -38,22 +38,22 @@ const ChatRoom: React.FC = () => {
   };
 
   return (
-    <div className="p-2 pb-0 h-screen w-[1200px] flex flex-col gap-4">
-      <div className="top-0 flex">
-        <HeaderComponent />
-      </div>
-      <div className="flex flex-col">
-        <div className="p-4 h-[83vh] flex flex-col">
-          <div className="flex-grow overflow-y-auto">
-            {messages.map((message, index) => (
-              <MessageComponent key={index} message={message} />
-            ))}
-            <div ref={chatBottomRef} />
-          </div>
-          <MessageInput onSendMessage={handleSendMessage} />
+    <div className="h-screen w-full flex justify-center">
+      <div className="max-w-[1200px] w-full flex flex-col">
+        <div className="sticky top-0 z-10">
+          <HeaderComponent />
         </div>
-        <div className="bottom-0 flex">
-          <Footer />
+        <div className="flex-grow flex flex-col p-4 overflow-y-auto">
+          {messages.map((message, index) => (
+            <MessageComponent key={index} message={message} />
+          ))}
+          <div ref={chatBottomRef} />
+        </div>
+        <div className="sticky bottom-0 z-10">
+          <div className="flex flex-col gap-2">
+            <MessageInput onSendMessage={handleSendMessage} />
+            <Footer />
+          </div>
         </div>
       </div>
     </div>

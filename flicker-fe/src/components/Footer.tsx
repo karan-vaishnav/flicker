@@ -1,7 +1,7 @@
 import logo from "../assets/flicker-logo.svg";
 export function Footer() {
   return (
-    <div className="flex justify-between text-black p-2 w-full font-text text-2xl items-center rounded-xl bg-[var(--color-gray)] dark:text-white dark:bg-[var(--color-black-800)]">
+    <div className="bottom-0 flex justify-between text-black p-2 w-full font-text text-2xl items-center rounded-xl bg-[var(--color-gray)] dark:text-white dark:bg-[var(--color-black-800)]">
       <img src={logo} alt="logo" className="h-[18px] md:h-[30px] sm:h-[25px]" />
       <p className="text-sm sm:text-lg md:text-xl">Developed by Karan</p>
       <div className="flex">

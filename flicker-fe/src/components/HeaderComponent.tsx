@@ -55,7 +55,7 @@ export function HeaderComponent() {
   };
 
   return (
-    <div className="flex rounded w-full h-[8vh] p-2 items-center justify-start text-3xl font-title shadow-2xl bg-white dark:bg-black-900 text-black dark:text-white">
+    <div className="top-0 flex rounded w-full h-[8vh] p-2 items-center justify-center text-3xl font-title shadow-2xl bg-white dark:bg-black-900 text-black dark:text-white">
       <div className="flex-grow flex justify-center items-center">
         <img className="h-[5vh] md:h-[7vh] sm:h-[6vh]" src={logo} alt="logo" />
       </div>
